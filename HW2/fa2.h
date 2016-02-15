@@ -6,8 +6,14 @@ using std::vector;
 #include<random>
 using std::normal_distribution;
 using std::mt19937;
+#include<future>
+using std::async;
 #include<functional>
 using std::function;
+
+//Debug includes
+#include<iostream>
+using std::cout;
 
 inline vector<double> normRand (size_t n)
 {
@@ -25,7 +31,19 @@ inline vector<double> normRand (size_t n)
 inline vector<int> asyncSquares (size_t n)
 {
 	vector<int> squares(n);
-	return squares; //Dummy return	
+	function<size_t(size_t)> square = 
+		[&](size_t num)
+		{
+			return num*num;
+		};
+
+	for(int i = 0; i < n; i++)
+	{
+		auto handle = async(std::launch::async,square,i);
+		squares[i] = handle.get();
+	}
+
+	return squares;
 }
 
 template <typename fn>
