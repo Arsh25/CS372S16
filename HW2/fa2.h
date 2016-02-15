@@ -31,6 +31,7 @@ inline vector<double> normRand (size_t n)
 inline vector<int> asyncSquares (size_t n)
 {
 	vector<int> squares(n);
+	
 	function<size_t(size_t)> square = 
 		[&](size_t num)
 		{
@@ -46,10 +47,14 @@ inline vector<int> asyncSquares (size_t n)
 	return squares;
 }
 
-template <typename fn>
-auto repeatFunction (fn f, int n)
+template <typename fn >
+function <int(int)> repeatFunction (fn f, int n)
 {
+	//int temp = f()
+	//cout << "temp: "<<temp;
 	return f;
+
 }
+
 
 #endif
