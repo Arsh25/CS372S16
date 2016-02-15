@@ -18,9 +18,26 @@ inline vector<int> asyncSquares (size_t n)
 	return squares; //Dummy return	
 }
 
-function<function(function f,int n) repeatFunction
+template <typename fn>
+auto repeatFunction (fn f, int n)
 {
 	return f;
-} 
+}
+
+/*int repeatFunction (std::function<int(int)> f , int n)
+{
+	return f(1);
+}*/
+
+//template<typename T>
+/*inline int operator() (std::function<int(int num) f, int n) repeatFunction
+{
+	return f(num); //Dummy return 
+}
+*/
+/*function<function<int(int)>f,int n >repeatFunction
+{
+	return f(n);
+}*/
 
 #endif
