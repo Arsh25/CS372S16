@@ -1,3 +1,11 @@
+/*
+	Arsh Chauhan
+	fa2.h
+	Header for fa2_test.cpp
+	02/15/2016
+*/
+
+
 #ifndef FA_2_H
 #define FA_2_H
 
@@ -11,10 +19,14 @@ using std::async;
 #include<functional>
 using std::function;
 
-//Debug includes
-#include<iostream>
-using std::cout;
 
+
+/*
+	normRand: Geberates n pseudorandom numbers using C++11 random number generators 
+	Pre: None
+	Post: Returns a vector of size n. Each element is a pseudorandom number
+		  Uses constant seed to generate same numbers every run
+*/
 inline vector<double> normRand (size_t n)
 {
 	vector<double> randNos;
@@ -28,6 +40,13 @@ inline vector<double> normRand (size_t n)
 	return randNos;
 }
 
+
+/*
+	asyncSquares: Calculates squares from 0 - n asynchronously
+	Pre: None
+	Post: Returns vector of size n, where:
+			squares[0] = 0, squares [1] = 1,...,squares [n] = n*n
+*/
 inline vector<int> asyncSquares (size_t n)
 {
 	vector<int> squares(n);
@@ -47,6 +66,12 @@ inline vector<int> asyncSquares (size_t n)
 	return squares;
 }
 
+
+/*
+	repeatFunction: closure that calls a passed function n times
+	Pre: f must be prototyped as int foo(int)
+	Post: Returns a std:function which performs the passed function n times 
+*/
 inline function <int(int)> repeatFunction (function <int(int num)> f, int n)
 {
 	function <int(int)> retFn = [=] (int arg)
