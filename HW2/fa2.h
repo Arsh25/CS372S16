@@ -50,6 +50,7 @@ inline vector<double> normRand (size_t n)
 inline vector<int> asyncSquares (size_t n)
 {
 	vector<int> squares(n);
+	vector<std::future<size_t>> handles;
 	
 	function<size_t(size_t)> square = 
 		[&](size_t num)
@@ -57,10 +58,14 @@ inline vector<int> asyncSquares (size_t n)
 			return num*num;
 		};
 
-	for(int i = 0; i < n; i++)
+	for(size_t i = 0; i < n; i++)
 	{
-		auto handle = async(std::launch::async,square,i);
-		squares[i] = handle.get();
+		handles.push_back(async(std::launch::async,square,i));
+	}
+
+	for(size_t i = 0; i < n; i++)
+	{
+		squares[i] = handles[i].get();
 	}
 
 	return squares;
