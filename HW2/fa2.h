@@ -47,12 +47,19 @@ inline vector<int> asyncSquares (size_t n)
 	return squares;
 }
 
-template <typename fn >
-function <int(int)> repeatFunction (fn f, int n)
+inline function <int(int)> repeatFunction (function <int(int num)> f, int n)
 {
-	//int temp = f()
-	//cout << "temp: "<<temp;
-	return f;
+	function <int(int)> retFn = [=] (int arg)
+	{
+		
+		for (int i = 0; i < n; i++)
+		{
+			arg = f(arg);
+		}
+		return arg;
+	};
+
+	return retFn;
 
 }
 
