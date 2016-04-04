@@ -1,0 +1,62 @@
+%!
+%Exercise 1
+%% Draws a one inch 3 sided box and inch in from the bottom left
+
+ 
+/inch {72 mul} def      % Convert inches->points (1/72 inch)
+
+newpath                 % Start a new path
+1 inch 1 inch moveto    % an inch in from the lower left
+2 inch 1 inch lineto    % bottom side
+2 inch 2 inch lineto    % right side
+1 inch 2 inch lineto    % top side
+stroke                  % Draw the box on the paper
+showpage                % We're done... eject the page
+
+%Exercise 2
+% Draws 36 lines in a circular pattern
+% Increase size of line as rotation progresses 
+
+0 10 360 {		% Go from 0 to 360 degrees in 10 degree steps
+  dup			% deuplicate the counter 
+  newpath		% Start a new path
+
+	gsave			% Keep rotations temporary
+    144 144 moveto
+    rotate		% Rotate by degrees on stack from 'for'
+    72 add
+    2 div 
+    0 rlineto	
+    stroke
+  grestore		% Get back the unrotated state
+
+} for			% Iterate over angles
+
+showpage
+
+%!
+% Draw a box at 72, 72 using translate
+
+% operator box: xcoord ycoord box -
+% Creates one inch box at xcoord, ycoord
+/box {
+   newpath
+   moveto
+   72 0 rlineto
+   0 72 rlineto
+   -72 0 rlineto
+   closepath
+} def
+
+gsave				% Preserve the old coordinates
+  72 72 translate		% Set origin to (72, 72)
+  %Create a 3x3 array of boxes 
+  [0 0 box stroke [72 0 box stroke 144 0 box stroke] 
+  0 72 box stroke [72 72 box stroke 144 72 box stroke] 
+  0 144 box stroke [ 72 144 box stroke 144 144 box stroke]]
+  %0 0 box stroke		% Draw the box at the new origin
+grestore			% Restore the old coordinates
+
+showpage
+
+
