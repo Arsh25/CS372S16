@@ -11,7 +11,6 @@
 %Exercise 1
 %% Draws a one inch 3 sided box an inch in from the bottom left
 
- 
 /inch {72 mul} def      % Convert inches->points (1/72 inch)
 
 newpath                 
@@ -107,13 +106,13 @@ showpage
 %Exercise 5
 %Draw rotated copies of last box from Ex 4
 
-0 setgray				% 100% black
-1 setlinewidth			% One point thick lines
+0 setgray				
+1 setlinewidth			
 72 72 moveto 72 144 lineto stroke	% Draw a one inch line
 
-gsave					% Save a copy of the current settings
-  0.5 setgray			% 50% black
-  3 setlinewidth		% 10 point wide lines
+gsave				
+  0.5 setgray			
+  3 setlinewidth		
   144 72 moveto 144 144 lineto stroke	% Draw a one inch wide line
   gsave % Save current position 
   216 72 box stroke % Draw gray outline 
@@ -123,7 +122,7 @@ gsave					% Save a copy of the current settings
   216 72 box                    
   0.35 setgray			
   fill	 			
-grestore                % Go back to the original settings
+grestore
 
 % Draw 9 boxes, each rotated by 9 degrees from the previous
 0 9 90 { % Go from 0 to 90 degrees in 9 degree steps
